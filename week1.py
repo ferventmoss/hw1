@@ -4,7 +4,7 @@ import scipy.optimize
 import random
 
 def parseData(fname):
-  for l in urllib.urlopen(fname):
+  for l in open("beer_50000.json"):
     yield eval(l)
 
 print "Reading data..."
