@@ -7,9 +7,9 @@ def parseData(fname):
   for l in urllib.urlopen(fname):
     yield eval(l)
 
-print (Reading data...)
+print "Reading data..."
 data = list(parseData("http://jmcauley.ucsd.edu/cse255/data/beer/beer_50000.json"))
-print (done)
+print "done"
 
 def feature(datum):
   feat = [1]
@@ -65,7 +65,7 @@ def f(theta, X, y, lam):
   diff = X*theta - y
   diffSq = diff.T*diff
   diffSqReg = diffSq / len(X) + lam*(theta.T*theta)
-  print (offset =), diffSqReg.flatten().tolist()
+  print "offset =", diffSqReg.flatten().tolist()
   return diffSqReg.flatten().tolist()[0]
 
 # Derivative
@@ -75,7 +75,7 @@ def fprime(theta, X, y, lam):
   y = numpy.matrix(y).T
   diff = X*theta - y
   res = 2*X.T*diff / len(X) + 2*lam*theta
-  print (gradient =), numpy.array(res.flatten().tolist()[0])
+  print "gradient =", numpy.array(res.flatten().tolist()[0])
   return numpy.array(res.flatten().tolist()[0])
 
 scipy.optimize.fmin_l_bfgs_b(f, [0,0], fprime, args = (X, y, 0.1))
