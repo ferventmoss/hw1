@@ -4,11 +4,11 @@ import scipy.optimize
 import random
 
 def parseData(fname):
-  for l in open("beer_50000.json"):
+  for l in open(fname):
     yield eval(l)
 
 print "Reading data..."
-data = list(parseData("http://jmcauley.ucsd.edu/cse255/data/beer/beer_50000.json"))
+data = list(parseData("beer_50000.json"))
 print "done"
 
 def feature(datum):
@@ -54,6 +54,7 @@ def feature(datum):
 X = [feature(d) for d in data2]
 y = [d['review/overall'] for d in data2]
 theta,residuals,rank,s = numpy.linalg.lstsq(X, y)
+print "theta = {}, residuals = {}".format(theta, residuals)
 
 ### Gradient descent ###
 
