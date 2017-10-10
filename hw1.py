@@ -41,22 +41,22 @@ def feature(datum):
 #print "theta = {} residauls = {}".format(theta, residuals)
 
 ### HW3 Answer
-halfsz = len(data)/2
-sz     = len(data)
-trainningData = data[:halfsz];
-testingData   = data[halfsz:sz];
-experiments = [trainningData, testingData]
-
-for experiment in experiments: 
-    X = [feature(d) for d in experiment] 
-    y = [d['review/overall'] for d in experiment] 
-    theta,residuals,rank,s = numpy.linalg.lstsq(X, y)
-    if experiment == trainningData:
-        print "training result:"
-    else:
-        print "testing result:"
-    print "MSE = {}".format(float(residuals) / float(len(experiment)))
-
+#halfsz = len(data)/2
+#sz     = len(data)
+#trainningData = data[:halfsz];
+#testingData   = data[halfsz:sz];
+#experiments = [trainningData, testingData]
+#
+#for experiment in experiments: 
+#    X = [feature(d) for d in experiment] 
+#    y = [d['review/overall'] for d in experiment] 
+#    theta,residuals,rank,s = numpy.linalg.lstsq(X, y)
+#    if experiment == trainningData:
+#        print "training result:"
+#    else:
+#        print "testing result:"
+#    print "MSE = {}".format(float(residuals) / float(len(experiment)))
+#
 ### HW4 Answer ###
 
 def feature(datum, style):
@@ -78,22 +78,48 @@ trainningData = data[:halfsz];
 testingData   = data[halfsz:sz];
 experiments = [trainningData, testingData]
 
-def runExp(experiments, style):
+def filterStyles(style):
+    if styles[style][cntIdx] >= 50:
+        return style
+
+stylesList = [ style for style in styles if styles[style][cntIdx >= 50]]
+nStyles = len(stylesList)
+print stylesList
+stylesOrderMap = {}
+
+for idx in range(len(stylesList)):
+    stylesOrderMap[stylesList[idx]] = idx
+
+
+def feature(datum, style):
+    feat = [0 for i in range(nStyles)]
+    feat[0] = 1;
+
+    if style in stylesOrderMap and stylesOrderMap[style] + 1 < nStyles:
+        feat[stylesOrderMap[style] + 1] = 1
+    #print feat
+    return feat
+
+def filterData(datum):
+    style = datum['beer/style']
+    if styles[style][cntIdx] >= 50:
+        return datum
+
+filtered_training_data = [d for d in trainningData if styles[d['beer/style']][cntIdx] >= 50]
+filtered_testing_data =  [d for d in testingData if styles[d['beer/style']][cntIdx] >= 50]
+stylesExperiment = [filtered_training_data, filtered_testing_data]
+
+def runExp(experiments):
     for experiment in experiments: 
-        X = [feature(d, style) for d in experiment] 
+        X = [feature(d, d['beer/style']) for d in experiment] 
         y = [d['review/overall'] for d in experiment] 
         theta,residuals,rank,s = numpy.linalg.lstsq(X, y)
-        if experiment == trainningData:
+        if experiment == filtered_training_data: 
             print "training result:"
         else:
             print "testing result:"
-        if(len(residuals)): 
-            print "MSE = {}".format(float(residuals) / float(len(experiment)))
-        else:
-            print "MSE = 0"
 
-for style in styles:
-    if styles[style][cntIdx] >= 50: 
-        print "styles: {}".format(style)
-        print "review counts: {}".format(styles[style][cntIdx]) 
-        runExp(experiments, style)
+        print "theta = {}".format(theta)
+        print "residuals = {}".format(residuals)
+        #print "MSE = {}".format(float(residuals) / float(len(experiment)))
+runExp(stylesExperiment)
