@@ -37,6 +37,7 @@ def fprime(theta, X, y, lam):
   dl = [0.0]*len(theta)
   for i in range(len(X)):
     # Fill in code for the derivative
+    sig = sigmoid(inner(X[i], theta))
     pass
   # Negate the return value since we're doing gradient *ascent*
   return numpy.array([-x for x in dl])

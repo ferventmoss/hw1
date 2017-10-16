@@ -344,3 +344,7 @@ accuracy for test set = 0.89112
 C  = 100000
 accuracy for trainning set = 0.84092
 accuracy for test set = 0.87168
+
+#8
+Final log likelihood = -6786.94770036
+Accuracy = 0.9218
