@@ -292,9 +292,55 @@ theta north is the vaule of rating for non "American IPA"
 theta one is differences of how much people liked or disliked "American IPA" compared to non "American IPA"
 
 #3
-training result:
-MSE = 0.528174997341
-testing result:
-MSE = 0.451349926653
+training data MSE = 0.558107286559
+testing MSE = 0.468410050967
 
 #4
+theta = 
+[ 2.98192771  0.80211898  0.89126069  0.62582137  0.74635512  0.66776635
+  0.0470578   0.75443593  1.07424318  0.80068098  0.50987557  0.71327777
+  0.27261774 -0.01901758  0.6407138   0.79821413  0.76473896  0.75765562
+  0.64183467  0.61142956  1.09991085  0.79258209  1.00089016 -0.0335806
+  1.20488548  0.7808928   0.72515676  0.72019995  0.42110259  0.48950086
+  0.55552547  0.2147936   0.97730306  1.08231471  0.50183362  0.35807229
+  1.08592575  0.65318556 -0.13390339  1.23110731  0.80557229  0.46327777
+  0.20726148  0.7229334   1.01892325  1.37897454  0.5873494   0.617337
+  0.23351944  0.96729104  0.76170286  1.05139704  1.2068478   0.61471094
+ -0.58530743  1.31844335  0.9257646   0.70322971  1.4980354   1.10146566
+  0.63969391  1.11407989  0.68530778  0.7148808   0.96069524 -0.72637216
+  0.62766589  0.53160612  0.35248787  1.23164292  0.77416985  0.27297425
+  0.54585007  0.83786924]
+
+training data MSE = 0.362948761535
+ testing data MSE = 0.349491667368
+
+#5
+accuracy for trainning set = 0.859
+accuracy for test set = 0.87516
+
+#6
+feature vector used: [['beer/ABV'], ['review/palate']]
+accuracy for trainning set = 0.87432
+accuracy for test set = 0.89112
+
+#7
+As C increases, accuracy drops as expected.
+When C is 10, the accuracy of the training set and test set are closer
+than the other C values. 
+With bigger C, there exists bigger gap in the accuracy between test and tarin data set.
+
+C  = 0.1
+accuracy for trainning set = 0.92188
+accuracy for test set = 0.9136
+
+C  = 10
+accuracy for trainning set = 0.91944
+accuracy for test set = 0.91264
+
+C  = 1000
+accuracy for trainning set = 0.87432
+accuracy for test set = 0.89112
+
+C  = 100000
+accuracy for trainning set = 0.84092
+accuracy for test set = 0.87168

@@ -23,7 +23,7 @@ theta,residuals,rank,s = numpy.linalg.lstsq(X, y)
 
 X = numpy.matrix(X)
 y = numpy.matrix(y)
-numpy.linalg.inv(X.T * X) * X.T * y.T
+print numpy.linalg.inv(X.T * X) * X.T * y.T
 
 ### Do older people rate beer more highly? ###
 
